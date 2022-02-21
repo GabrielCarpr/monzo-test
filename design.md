@@ -55,4 +55,9 @@ Receives HTML pages from the queue and parses any URLs from them, passing them t
 #### URL filter
 Receives URLs, filters out any previously before seen URLs and any non-HTML pages, and then adds them to the URL queue for crawling.
 
-This component
+
+## Retrospective
+### Trade-offs
+
+### Deficiencies
+- Pages responding with an error will just be ignored. Many 5xx errors may be transient and could respond successfully if retried later, however this implementation of the design has no capability to requeue. I think in this iteration this is okay as the crawler is designed to be run once with no persistent state, so it's unlikely the target would have time to recover by the time the URL was retried

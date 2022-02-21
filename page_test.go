@@ -19,14 +19,14 @@ func TestFansOutQueue(t *testing.T) {
 	q.Subscribe(three)
 
 	q.Publish(monzo.Page{
-		URL:     "www.monzo.com",
+		URL:     monzo.NewURL("www.monzo.com"),
 		Content: "test",
 	})
 
 	page1 := <-one
-	assert.Equal(t, "www.monzo.com", page1.URL)
+	assert.Equal(t, "www.monzo.com", page1.URL.String())
 	page2 := <-two
-	assert.Equal(t, "www.monzo.com", page2.URL)
+	assert.Equal(t, "www.monzo.com", page2.URL.String())
 	page3 := <-three
-	assert.Equal(t, "www.monzo.com", page3.URL)
+	assert.Equal(t, "www.monzo.com", page3.URL.String())
 }
